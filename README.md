@@ -23,7 +23,33 @@ An AI-powered technical interviewer application.
    - Backend: `cd backend && npm install`
    - AI Service: `cd ai_Service && pip install -r requirements.txt`
 
-### Running the App
-- Frontend: `npm run dev` (in Frontend directory)
-- Backend: `npm run dev` (in backend directory)
-- AI Service: `uvicorn main:app --reload` (in ai_Service directory)
+### Running with Docker
+
+You can run the entire stack using Docker Compose:
+
+1. Create a root `.env` file with the following variables:
+   ```env
+   MONGO_DB_URI=your_mongodb_uri
+   JWT_SECRET=your_jwt_secret
+   GOOGLE_CLIENT_ID=your_google_client_id
+   VITE_GOOGLE_CLIENT_ID=your_google_client_id
+   ```
+2. Build and start the containers:
+   ```bash
+   docker-compose up --build
+   ```
+The app will be available at `http://localhost:5173`.
+
+## Deployment
+
+### Railway Deployment
+1. Connect your GitHub repository to Railway.
+2. Railway will detect the multiple services. You can set up each one by specifying the path to its `Dockerfile`.
+3. Ensure you set the environment variables in the Railway dashboard for each service.
+
+### AWS Deployment
+You can use **AWS App Runner** or **ECS (Elastic Container Service)**:
+1. Push your Docker images to **AWS ECR (Elastic Container Registry)**.
+2. Create services in App Runner or ECS pointing to these images.
+3. Configure the load balancer and environment variables accordingly.
+
