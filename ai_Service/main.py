@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 from typing import Optional
 import ollama
 import whisper
-from pydub import AudioSegment
+# from pydub import AudioSegment
 
 load_dotenv()
 
