@@ -5,7 +5,8 @@ import jwt from 'jsonwebtoken';
 import User from '../models/user.js';
 
 
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+// Move client inside or use a getter to ensure env vars are loaded
+const getGoogleClient = () => new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 
 const generateToken = (id) => {
@@ -70,6 +71,7 @@ const googleLogin = asyncHandler(async (req, res) => {
   
     const { token } = req.body; 
 
+    const client = getGoogleClient();
    
     const ticket = await client.verifyIdToken({
         idToken: token,

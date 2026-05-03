@@ -1,7 +1,6 @@
-version: '3.8'
-
 services:
   frontend:
+    container_name: ai_frontend
     build:
       context: ./Frontend/AI INTERVIEW
       dockerfile: Dockerfile
@@ -14,6 +13,7 @@ services:
       - VITE_GOOGLE_CLIENT_ID=${VITE_GOOGLE_CLIENT_ID}
 
   backend:
+    container_name: ai_backend
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -30,6 +30,7 @@ services:
       - AI_SERVICE_URL=http://ai_service:8000
 
   ai_service:
+    container_name: ai_service
     build:
       context: ./ai_Service
       dockerfile: Dockerfile
@@ -37,4 +38,16 @@ services:
       - "8000:8000"
     environment:
       - AI_SERVICE_PORT=8000
-      - OLLAMA_MODEL_NAME=mistral # Or whichever model you use
+      - OLLAMA_MODEL_NAME=mistral
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=aiinterview
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
