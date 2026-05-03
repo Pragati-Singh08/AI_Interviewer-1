@@ -14,7 +14,7 @@ from pydub import AudioSegment
 
 load_dotenv()
 
-AI_SERVICE_PORT = int(os.getenv("AI_SERVICE_PORT",8000))
+PORT = int(os.getenv("PORT",10000))
 OLLAMA_MODEL_NAME=os.getenv("OLLAMA_MODEL_NAME","mistral")
 
 app=FastAPI(title="AI Interviewer Microservice",version="1.0")
@@ -194,5 +194,5 @@ async def evaluate(request:EvaluationRequest):
         
 
 if __name__ == "__main__":
-    uvicorn.run(app,host="0.0.0.0",port=AI_SERVICE_PORT)
-   
+    uvicorn.run(app,host="0.0.0.0",port=PORT)
+    
